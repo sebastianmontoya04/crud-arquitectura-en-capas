@@ -1,8 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const { verificarToken } = require('../middlewares/verificarToken')
+const {
+    crearUsuario,
+    registrarUsuarios,
+    iniciarSesion } = require('../controllers/user.controllers');
 
-const { crearUsuario } = require('../controllers/user.controllers')
+router.post('/crearUsuarios', verificarToken, crearUsuario );
+router.post('/registrarUsuarios', registrarUsuarios);
+router.post('/iniciarSesion', iniciarSesion);
 
-router.post('/crearUsuarios', crearUsuario);
 
-module.exports = router
+module.exports = router;
